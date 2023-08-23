@@ -1,7 +1,7 @@
 # 프로메테우스를 기동하기 위한 환경설정 파일을 configmap 으로 정의함
 
 apiVersion: v1
-kind: Configmap
+kind: ConfigMap
 metadata:
   name: prometheus-server-conf
   labels:
