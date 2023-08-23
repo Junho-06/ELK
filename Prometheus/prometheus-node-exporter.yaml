@@ -1,0 +1,47 @@
+# 프로메테우스가 수집하는 메트릭은 쿠버네티스에서 기본으로 제공하는 System Metric만 수집하는게 아니라
+# 그 외의 것들도 수집하기 때문에 수집역할을 하는 에이전트를 따로 두어야 합니다.
+
+# 그 역할을 수행하는게 node-exporter 이고 각 노드에 하나씩 띄워야 하므로 DaemonSet으로 구성해줘야 합니다.
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-exporter
+  namespace: monitoring
+  labels:
+    k8s-app: node-exporter
+spec:
+  selector:
+    matchLabels:
+      k8s-app: node-exporter
+  template:
+    metadata:
+      labels:
+        k8s-app: node-exporter
+    spec:
+      containers:
+        - image: prom/node-exporter
+          name: node-exporter
+          ports:
+            - containerPort: 9100
+              protocol: TCP
+              name: http
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: node-exporter
+  name: node-exporter
+  namespace: kube-system
+spec:
+  ports:
+    - nmae: http
+      port: 9100
+      nodePort: 31672
+      protocol:  TCP
+  type: NodePort
+  selector:
+    k8s-app: node-exporter
