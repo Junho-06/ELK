@@ -1,6 +1,6 @@
 # 프로메테우스 컨테이너가 쿠버네티스 api에 접근할 수 있는 권한 생성
 
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: prometheus
