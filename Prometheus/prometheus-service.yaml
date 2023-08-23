@@ -6,7 +6,7 @@ metadata:
   name: prometheus-service
   namespace: monitoring
   annotations:
-    prometheus.io/scarpe: 'true'
+    prometheus.io/scrape: 'true'
     prometheus.io/port:   '9090'
 spec:
   selector:
