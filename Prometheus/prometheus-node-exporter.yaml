@@ -38,7 +38,7 @@ metadata:
   namespace: kube-system
 spec:
   ports:
-    - nmae: http
+    - name: http
       port: 9100
       nodePort: 31672
       protocol:  TCP
